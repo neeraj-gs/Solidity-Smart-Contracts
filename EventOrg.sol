@@ -7,6 +7,14 @@ contract EventTicket{
     uint public totalAmount;
     uint public startAt;
     uint public endAt;
-    uint public timestamp;
+    uint public timeRange;
     string public message = "Buy Your First Event Ticket";
+
+    constructor(uint _ticketPrice){
+        ticketPrice=_ticketPrice;
+        startAt=block.timestamp;
+        endAt=block.timestamp + 7 days;
+        timestamp=(endAt-startAt)/60/60/24; //in seconds
+        
+    }
 }
