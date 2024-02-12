@@ -1,1 +1,8 @@
 This Contains all the information related to the Project adn contrains indexes and more 
+
+
+Voting Smart Cotract
+    3 ENtities
+    1.Candidate - The person who is standing for election
+    2.Election COmmision - Make sure election is conducted properly
+    3.Voter - Person who selects their leader or Candidate
