@@ -15,6 +15,13 @@ contract EventTicket{
         startAt=block.timestamp;
         endAt=block.timestamp + 7 days;
         timestamp=(endAt-startAt)/60/60/24; //in seconds
-        
+
+    }
+
+
+    function buyTicket(uint _value) public returns(uint ticketId){
+        numberofTickets++; //tickets increses as someone buys
+        totalAmount+=_value;
+        ticketId=numberofTickets;
     }
 }
