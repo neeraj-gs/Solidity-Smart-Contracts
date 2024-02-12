@@ -58,5 +58,14 @@ contract Vote{
 
     }
 
+    function candidateVerification(address _person) internal view returns(bool){
+        for(uint i=1;i<nextcandidateId;i++){
+            if(candidateDetails[i].candidateAddress == _person){
+                return false;
+            }
+        }
+        return true;
+    }
+
 
 }
