@@ -35,7 +35,19 @@ const priceFetch = async(amount)=>{
     )
 
     const decimal1 = await token1.decimals();
-    console.log(decimal1)
-}
+    const decimal2 = await token2.decimals();
+    const amountIn = ethers.utils.parseUnits(humanFormat,decimal1).toString();
 
+    //number busd trnadered, checks , based on busd  how many wbnb we get 
+    const amountsOut = await routerInstance.getAmountsOut(amountIn,[
+        fromAddr,
+        toAddr
+    ]);
+    const humanOutput = ethers.utils.formatUnits(
+        amountsOut[1].toString(),
+        decimal2
+    )
+    console.log(humanOutput);
+}
+humanFormat="100"; //100 BUSD exchnage , how many wbnb we get it , convert 100 BUSD INto wei 100* 10^18
 priceFetch();
