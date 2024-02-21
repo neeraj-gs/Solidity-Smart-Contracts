@@ -14,3 +14,7 @@ const pairABI=[
 //router contract requied as fethcing happends here 
 //getA\mountOut is the functioon 
 const routerABI=[" function getAmountOut(uint amountIn, uint reserveIn, uint reserveOut) external pure returns (uint amountOut)"]
+
+module.exports ={
+    erc20ABI,factoryABI,routerABI,pairABI
+}
