@@ -6,6 +6,11 @@ Flash Loans Steps
         IUniswapV2Pair - Represent sa pool whre  2 diffrent tokens are deposited, used for trading, Used to get address of tokens in pool
         IUniswapV2Router01 & IUniswapV2Router01 - Responsoble for executing swaps and provideing liquiodity in uniswap protocol.
     2.Libraries
+        Address - Proivdes utility fucntions for working with Eth ADDRESSES 
+        SafeERC20 - provides safe methorrds for interacting with erc20 tokens, Prevents common mistakes and vulnarabilityes realted to token transfer 
+        SafeMath.sol - Provivdes arithmetic operatins that prevent ovveflws and underflows
+        UNiswapV2Library - Contains various utility functions used in V2 Protocol.
     3.Varaibles
+        Pankacefactory, pancakerouter,token addresses,deadline,max_int,min_int,
     4.Functions
 
