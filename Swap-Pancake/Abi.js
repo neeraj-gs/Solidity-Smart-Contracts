@@ -2,7 +2,7 @@
 //used to interact with the blockchain
 
 //ERC-20 Token is required as mos tokens folloe erc20 token standard 
-const erc20ABI=["function decimals() public view returns (uint8)"]
+const erc20ABI=["function decimals() external view returns (uint8)"]
 //get pair gives address of contract that handles tokens a and b , returnns the address of iquidity address provider contract for BUSD and WBNB
 const factoryABI = ["function getPair(address tokenA, address tokenB) external view returns (address pair)"] 
 
@@ -13,7 +13,7 @@ const pairABI=[
 
 //router contract requied as fethcing happends here 
 //getA\mountOut is the functioon 
-const routerABI=[" function getAmountOut(uint amountIn, uint reserveIn, uint reserveOut) external pure returns (uint amountOut)"]
+const routerABI=[" function getAmountsOut(uint amountIn, address[] memory path) public view returns (uint[] memory amounts)"]
 
 module.exports ={
     erc20ABI,factoryABI,routerABI,pairABI
