@@ -1,0 +1,11 @@
+Flash Loans Steps
+    1.Interfaces
+        Template, that provde a way to define a contracts external funcionts without implementing actual logic.[Specify what methords must be present in a contract wthout implementation details]
+        IUniswapV2Factory - Factory Comtract of UNiswapv2, responsible for deploying new instances of uniswap pairs , deals with liquidity pools - 
+        IERC20 - Any Tokens we use follows ERC20 standard, for fungible tokens.Give a set of fucntions and events a token must implement to be considered as ERC20 token.[Transfer, Balance, Allowance, Approve]
+        IUniswapV2Pair - Represent sa pool whre  2 diffrent tokens are deposited, used for trading, Used to get address of tokens in pool
+        IUniswapV2Router01 & IUniswapV2Router01 - Responsoble for executing swaps and provideing liquiodity in uniswap protocol.
+    2.Libraries
+    3.Varaibles
+    4.Functions
+

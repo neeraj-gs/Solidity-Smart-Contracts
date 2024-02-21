@@ -13,8 +13,8 @@ module.exports = {
   },
   networks:{
     hardhat:{
-      forking:{
-        url:"https://bsc-dataseed.binance.org/"
+      forking:{ //forking , makes a local copy of binance smart chain , we can use it without affectin thte main netwrok
+        url:"https://bsc-dataseed.binance.org/",
       }
     }
   }
