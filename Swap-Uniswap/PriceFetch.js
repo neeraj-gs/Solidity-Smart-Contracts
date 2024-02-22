@@ -11,7 +11,7 @@ const {erc20ABI,factoryABI,routerABI,pairABI} = require("./Abi.js")
 //we need a provider to connect to blockchain
 
 const provider = new ethers.providers.JsonRpcProvider(
-    "https://bsc-dataseed1.binance.org/"
+    "https://eth-mainnet.g.alchemy.com/v2/KJPwbYnV1P6hyMXum24Vxo-i2HWqh8yj"
 )
 
 //contract factory instnce 
@@ -47,7 +47,7 @@ const priceFetch = async(amount)=>{
         amountsOut[1].toString(),
         decimal2
     )
-    console.log(humanOutput);
+    console.log("THe Number of DAI TOkens Are: ",humanOutput);
 }
-humanFormat="100"; //100 BUSD exchnage , how many wbnb we get it , convert 100 BUSD INto wei 100* 10^18
+humanFormat="1"; //100 BUSD exchnage , how many wbnb we get it , convert 100 BUSD INto wei 100* 10^18
 priceFetch();
