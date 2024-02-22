@@ -40,7 +40,7 @@ contract FlashLoan {
     //5.Check if the token borrowed andd token0 address is same , if same tranfer amount ,if not transfer 0 
     //6.Create a data variable for triggering flash loan
     //7.Swap the borrowed amount inot our contract address, data makes sure next function pancake_call() is executed or called 
-    
+
 
 
         IERC20(BUSD).safeApprove(address(PANCAKE_ROUTER),MAX_INT); //makes sure we approve pancake router to spend token[as we execute flash loans , contract have to make sure flashloans run properly]
@@ -62,6 +62,44 @@ contract FlashLoan {
         bytes memory data = abi.encode(_busdBorrow,_amout,msg.sender); //we need to use the borrowed busd in flash loans, triggers a flah loan 
         //pair is the contract liquidity where busd and wbnb trading happens
         IUniswapV2Pair(pair).swap(amount0Out, amount1Out,address(this),data); //transfer busd inot the account of our contract
+        //pancake forked from uniswap, we are using pancake swap only and fetched from pancake itself
+        //If any is forked we can use others easily 
+
+    }
+
+
+    //pancake function call
+    function pancakeCall(address _sender,uint _amout0,_amout1,bytes calldata _data) external {
+        //1.
+
+
+
+
+        address token0 = IUniswapV2Pair(msg.sender).token0(); //msg.sender has pair contract address as , this fucntion si called from above function within it 
+        address token0 = IUniswapV2Pair(msg.sender).token1(); //using th busd for triangular arbitrage 
+
+        address pair = IUniswapV2Factory(PANCAKE_FACTORY).getPair(token0,token1); //fethcing liquidity pool for securty reasons so that there is no wrong address fetched 
+        require(msg.sender==pair,"Pool Does not Exist for the Current Pair") //check if address is same or not 
+        require(_sender==address(this),"Sender Does not Match"); //sender needs to have address of the contract
+
+        (address busdBorrow,uint amount address account)=abi.decode(
+            _data,(address,uint,address);
+        ); //we have got all the data busd , amut and accpount 
+
+        //fee calculation
+        uint fee = ((amount*3)/997)+1; //fee need to pay for pancake swap
+        uint repay = amount + fee;
+
+        uint loanAmount = _amout0>0?_amout0:_amout1; //if busd is 0 then 
+
+        //Triangular Arbitrage 
+
+        uint trade1Coin = placeTrade(BUSD,CROX,loanAmount); //amount of busd to exchange and take
+        uint trade2Coin = placeTrade(CROX,CAKE,trade1Coin);
+        uint trade3Coin = placeTrade(CAKE,BUSD,trade2Coin);
+
+        bool res = checkRes(repay,trade3Coin); //check if reapy amount ad trade3coin has some diffrence or not 
+        require(res,"Arbitrage is Not Profitable");
 
     }
 
