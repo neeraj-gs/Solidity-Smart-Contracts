@@ -13,4 +13,9 @@ Flash Loans Steps
     3.Varaibles
         Pankacefactory, pancakerouter,token addresses,deadline,max_int,min_int,
     4.Functions
+        3 Functions
+            1.Intilate Arbitrage 
+            2.Pancake Call[amke sure it take cates of settelment process] - fee , repay and profit all take shere 
+            3.trade, arbitrage is done between tokens 
+            
 
