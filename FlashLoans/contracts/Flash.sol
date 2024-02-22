@@ -32,6 +32,43 @@ contract FlashLoan {
         115792089237316195423570985008687907853269984665640564039457584007913129639935;
 
 
+    function checkRes(uint _repay,uint _aquireCoin) private returns(bool){
+        return _aquireCoin>_repay;
+        //returns true or false, if true, execute arbitrage , else revert back and no transaction based on load amount is given
+
+    }
+
+
+    function placeTrade(address _fromToken, address _toToken,uint _amountIn) private returns(uint){
+        //coin aquired, gives amunt of coin2 we get 
+        address pair = IUniswapV2Factory(PANCAKE_FACTORY).getPair(
+            _fromToken,
+            _toToken
+        );
+        require(pair!=address(0),"Pool Does not Exists");
+        address[] memory path = new address[](2); //lenght of arr is 2 stores coins 
+        path[0] = _fromToken;
+        path[1] = _toToken;
+
+        uint amountRequired = IUniswapV2Router01(PANCAKE_FACTORY).getAmountsOut(_amountIn,path)[1];
+        uint amountRecieved = IUniswapV2Router01(PANCAKE_ROUTER).swapExactTokensForTokens(
+            _amountIn,
+            amountRequired,
+            path,
+            address(this),
+            deadline //get over before deadline
+        )[1];
+
+        require(amountRecieved>0,"Transaction Abort");
+        return amountRecieved; //stered in tradecoins
+
+    }
+
+
+
+
+
+
     function initiateArbitrage(address _busdBorrow, uint _amout){ //addres of the token we are borrowing ffrom [any token can be taken] and the amount to borrow
     //1.Approval of the diffrent tokens we are using for arbitrage to the Pancake router for using the tokens on behalf of me 
     //2.Access liquidity Pool for the 2 tokens selected
@@ -70,7 +107,8 @@ contract FlashLoan {
 
     //pancake function call
     function pancakeCall(address _sender,uint _amout0,_amout1,bytes calldata _data) external {
-        //1.
+        //1.Called by Swap function internally 
+
 
 
 
@@ -100,6 +138,9 @@ contract FlashLoan {
 
         bool res = checkRes(repay,trade3Coin); //check if reapy amount ad trade3coin has some diffrence or not 
         require(res,"Arbitrage is Not Profitable");
+
+        IERC20(BUSD).transfer(account,trade3Coin - reapy);
+        IERC20(busdBorrow).transfer(pair,reapy); //pay back to the pool
 
     }
 
