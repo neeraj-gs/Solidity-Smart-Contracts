@@ -11,7 +11,7 @@ const {erc20ABI,factoryABI,routerABI,pairABI} = require("./Abi.js")
 //we need a provider to connect to blockchain
 
 const provider = new ethers.providers.JsonRpcProvider(
-    "https://eth-mainnet.g.alchemy.com/v2/KJPwbYnV1P6hyMXum24Vxo-i2HWqh8yj"
+    "https://eth-mainnet.g.alchemy.com/v2/KJPP6hyMXum24Vxo-i2HWqh8yj"
 )
 
 //contract factory instnce 
