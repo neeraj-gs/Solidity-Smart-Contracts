@@ -33,6 +33,16 @@ contract FlashLoan {
 
 
     function initiateArbitrage(address _busdBorrow, uint _amout){ //addres of the token we are borrowing ffrom [any token can be taken] and the amount to borrow
+    //1.Approval of the diffrent tokens we are using for arbitrage to the Pancake router for using the tokens on behalf of me 
+    //2.Access liquidity Pool for the 2 tokens selected
+    //3.Cehck if there exists a contract for swapping the selected tokens 
+    //4.Search address of the tokkens and fetch it 
+    //5.Check if the token borrowed andd token0 address is same , if same tranfer amount ,if not transfer 0 
+    //6.Create a data variable for triggering flash loan
+    //7.Swap the borrowed amount inot our contract address, data makes sure next function pancake_call() is executed or called 
+    
+
+
         IERC20(BUSD).safeApprove(address(PANCAKE_ROUTER),MAX_INT); //makes sure we approve pancake router to spend token[as we execute flash loans , contract have to make sure flashloans run properly]
         IERC20(CROX).safeApprove(address(PANCAKE_ROUTER),MAX_INT);
         IERC20(CAKE).safeApprove(address(PANCAKE_ROUTER),MAX_INT);
